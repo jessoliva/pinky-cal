@@ -2,9 +2,10 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
+  background-color:  #393A10;
 }
 
-textarea{
+textarea {
   background: transparent;
   border: none;
   resize: none;
@@ -13,19 +14,26 @@ textarea{
   padding: 10px;
 }
 
+/* JUMBOTRON STYLES START */
 .jumbotron {
   text-align: center;
-  background-color: transparent;
+  background-color: #393A10;
   color: black;
   border-radius: 0;
-  border-bottom: 10px solid black;
+  border-bottom: 10px solid #C4C0AB;
+  padding: 50px;
 }
 
-.description{
+.jumbotron h1 {
+  color: #C4C0AB;
+}
+/* JUMBOTRON STYLES START */
+
+.description {
   white-space: pre-wrap;
 }
 
-.time-block{
+.time-block {
   text-align: center;
   border-radius: 15px;
 }
