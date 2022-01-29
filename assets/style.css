@@ -6,15 +6,6 @@ body {
   background-color: #393a10;
 }
 
-textarea {
-  background: transparent;
-  border: none;
-  resize: none;
-  color: #000000;
-  border-left: 1px solid black;
-  padding: 10px;
-}
-
 /* JUMBOTRON STYLES START */
 .jumbotron {
   text-align: center;
@@ -40,6 +31,7 @@ textarea {
 .row {
   white-space: pre-wrap;
   height: 80px;
+  /* margin-bottom: 3px; */
   /* border-top: 1px solid #C4C0AB; */
 }
 
@@ -49,31 +41,78 @@ textarea {
   border-radius: 15px;
 }
 
+/* hour section styles */
+.hour {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: #000000;
+  background-color: #ffffff;
+  white-space: pre-wrap;
+  padding-right: 5px;
+  margin-right: 3px;
+}
+
+.hbot, .htop {
+  padding: 6px 6px;
+}
+
+.col-15{
+	flex: 0 0 11%;
+	max-width: 11%;
+}
+
+/* both hour and description */
+.hbot, .dbot {
+  border-top: 1px dashed #393a10;
+}
+
+.dtop, .htop {
+  border-top: 1px solid #393a10;
+}
+
 /* time description section styles */
+textarea {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  background: transparent;
+  border: none;
+  resize: none;
+  color: #393a10;
+  /* border-left: 1px solid black; */
+  padding: 10px;
+}
+
+textarea:focus {
+  outline: none !important;
+  border: 1px solid #C1839F;
+  box-shadow: 1px 1px 10px #C1839F;
+}
+
 .description {
+  background-color: #eae8dd;
   white-space: pre-wrap;
 }
 
-/* hour section styles */
-.hour {
-  background-color: #ffffff;
-  color: #000000;
-  border-top: 1px dashed #000000;
+.dbot, .dtop {
+  padding: 6px 6px;
 }
 
 /* save button styles */
 .saveBtn {
-  border-left: 1px solid black;
+  color: white;
+  border-top: 1px solid #393a10;
+  border-left: 1px solid #393a10;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: #787354;
-  color: white;
 }
 
 .saveBtn:hover {
+  color: #393a10;
   transition: all 0.6s ease-in-out;
   background-color: #c4c0ab;
-  color: #393a10;
 }
 
 .saveBtn span {
@@ -97,3 +136,7 @@ textarea {
   color: white;
 }
 /* WHEN STYLES END */
+
+.des {
+  max-height: 70px;
+}
