@@ -54,7 +54,7 @@ const containerEl = $('.container');
 
 // set time for timeblocks
 let time00 = ['700 AM', '800 AM', '900 AM', '1000 AM', '1100 AM', '1200 PM', '100 PM', '200 PM', '300 PM', '400 PM', '500 PM'];
-let time24 = [7, 8, 9, 10, 11, 12, 13, 14, 15, 19, 20]
+let timeHR = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
 let time30 = ['730 AM', '830 AM', '930 AM', '1030 AM', '1130 AM', '1230 PM', '130 PM', '230 PM', '330 PM', '430 PM', '530 PM'];
 
 // dynamically create the timeblocks
@@ -62,28 +62,29 @@ function createBlocks() {
 
     for(i = 0; i < 11; i++) {
         // create the row div element
-        const rowEl = $("<div>").addClass("row d-flex justify-content-center");
+        const rowEl = $('<div>').addClass('row d-flex justify-content-center');
 
         // create hour element
-        const hourEl = $("<div>").addClass("hour col-15 p-0 d-flex flex-column");
+        const hourEl = $('<div>').addClass('hour col-15 p-0 d-flex flex-column');
         // create 00 time element
-        let time1El = $("<div>").addClass("htop h-50 text-right").text(time00[i]);
+        let time1El = $('<div>').addClass('htop h-50 text-right').text(time00[i]);
         // create 30 time element
-        let time2El = $("<div>").addClass("hbot h-50 text-right").text(time30[i]);
+        let time2El = $('<div>').addClass('hbot h-50 text-right').text(time30[i]);
         // append time1 and time2 to hour
         hourEl.append(time1El, time2El);
 
         // create description element
-        const desEl = $("<div>").attr('id',time24[i]).addClass("description col-8 p-0 d-flex flex-column");
+        const desEl = $('<div>').attr('id',timeHR[i]).addClass('description col-8 p-0 d-flex flex-column');
         // create 00 des element
-        let des1El = $("<textarea>").addClass("dtop h-50");
+        let des1El = $('<textarea>').addClass('dtop h-50 ' + 'block' + timeHR[i]);
         // create 30 des element
-        let des2El = $("<textarea>").addClass("dbot h-50");
+        let des2El = $('<textarea>').addClass('dbot h-50 ' + 'block' + timeHR[i]);
         // append des1 and des2 to description
         desEl.append(des1El, des2El)
 
         // create button element
-        const btnEl = $('<button>').addClass('saveBtn col-1 btn');
+        // have to use specific sequence of quotes for saveEvents arguments 
+        const btnEl = $('<button>').addClass('saveBtn col-1 btn').attr('onclick', "saveEvents(event, '" + time00[i] + "')"); 
         // create span element
         const spanEl = $('<span>').addClass('oi oi-task');
         // append span to button
@@ -104,7 +105,6 @@ function compareTime() {
     let currHR = moment().format('HH');
     // console.log(currHR);
     let currTime = parseInt(currHR);
-    console.log(currHR);
 
     // reference text area
     const textArea = $('.description');
@@ -114,17 +114,14 @@ function compareTime() {
     // compare 00 hour to current time
     for (i = 0; i < 11; i++) {
 
-        // get each hr value from time24 array
-        let blockTime = time24[i];
+        // get each hr value from timeHR array
+        let blockTime = timeHR[i];
 
         // reference textarea element by id
         let textAreaEl = $('#' + blockTime);
-        console.log(textAreaEl);
         
         // if blockTime is less than currTime --> add past class
         if (blockTime < currTime) {
-            console.log(time24[i]);
-            console.log('past');
 
             // get textarea for htop and hbot and add past class
             textAreaEl.addClass('past');
@@ -132,9 +129,7 @@ function compareTime() {
         // if blockTime is greater than currTime --> add future class
         else if (blockTime > currTime) {
 
-            console.log('future');
-
-            // // get textarea for htop and hbot and add future class
+            // get textarea for htop and hbot and add future class
             textAreaEl.addClass('future');
         }
         // else leave as is
@@ -142,4 +137,39 @@ function compareTime() {
     }
 };
 compareTime();
+
+// array to hold events for timeblock
+let eventsArr = [];
+
+function saveEvents(event, timeBlock) {
+
+    // get main parent div 
+    const mainParent = $(event.target).parent();
+    const textAreaParent = mainParent.children('.description');
+    const textAreas = textAreaParent.children('textarea');
+
+    for (i = 0; i < 2; i++) {
+        // get value for each textarea
+        let eventTexts = textAreas[i].value;
+
+        // if textareas are empty
+        if (eventTexts !== '') {
+            // push texts into empty events array
+            eventsArr.push(eventTexts);
+        }
+    }
+
+    if (eventsArr.length !== 0) {
+        // save event texts to local storage with key being specific timeblock time
+        localStorage.setItem(timeBlock, JSON.stringify(eventsArr));
+    }
+
+    // button out of focus
+    event.target.blur();
+}
+
+function loadEvents() {
+
+
+}
 

@@ -131,6 +131,7 @@ textarea:focus {
 
 .saveBtn span {
   font-size: 35px;
+  pointer-events: none; /* to stop icon from taking on click event */
 }
 /* HOUR BLOCK STYLES END */
 
