@@ -62,7 +62,7 @@ function createBlocks() {
         desEl.append(des1El, des2El)
 
         // create button element
-        // have to use specific sequence of quotes for saveEvents arguments 
+        // have to use specific sequence of quotes for saveEvents arguments @ attr
         const btnEl = $('<button>').addClass('saveBtn col-1 btn').attr('onclick', "saveEvents(event, '" + time00[i] + "')"); 
         // create span element
         const spanEl = $('<span>').addClass('oi oi-task');
@@ -143,6 +143,10 @@ function saveEvents(event, eventTime) {
     }
     // if textTop is a non-empty value AND textBot is an empty value, then push both 
     if (textTop && !textBot) {
+        eventsArr.push(textTop, textBot);
+    }
+    // if both textTop and textBot are filled, then push both
+    if (textTop && textBot) {
         eventsArr.push(textTop, textBot);
     }
 
