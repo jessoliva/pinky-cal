@@ -60,6 +60,10 @@ let time30 = ['730 AM', '830 AM', '930 AM', '1030 AM', '1130 AM', '1230 PM', '13
 // dynamically create the timeblocks
 function createBlocks() {
 
+    // load saved events
+    let savedEvents = loadEvents();
+    console.log(savedEvents);
+
     for(i = 0; i < 11; i++) {
         // create the row div element
         const rowEl = $('<div>').addClass('row d-flex justify-content-center');
@@ -76,9 +80,15 @@ function createBlocks() {
         // create description element
         const desEl = $('<div>').attr('id',timeHR[i]).addClass('description col-8 p-0 d-flex flex-column');
         // create 00 des element
-        let des1El = $('<textarea>').addClass('dtop h-50 ' + 'block' + timeHR[i]);
+        let des1El = $('<textarea>').addClass('dtop h-50');
         // create 30 des element
-        let des2El = $('<textarea>').addClass('dbot h-50 ' + 'block' + timeHR[i]);
+        let des2El = $('<textarea>').addClass('dbot h-50');
+
+        // if a timeblock key in savedEvents exists, then set its values to the correct textarea
+        if (savedEvents[time00[i]]) {
+            des1El.text(savedEvents[time00[i]][0]);
+            des2El.text(savedEvents[time00[i]][1]);
+        }
         // append des1 and des2 to description
         desEl.append(des1El, des2El)
 
@@ -138,10 +148,10 @@ function compareTime() {
 };
 compareTime();
 
-// array to hold events for timeblock
-let eventsArr = [];
-
-function saveEvents(event, timeBlock) {
+function saveEvents(event, eventTime) {
+    // array to hold events for timeblock
+    // save within function to ONLY save information of button clicked 
+    let eventsArr = [];
 
     // get main parent div 
     const mainParent = $(event.target).parent();
@@ -153,15 +163,16 @@ function saveEvents(event, timeBlock) {
         let eventTexts = textAreas[i].value;
 
         // if textareas are empty
-        if (eventTexts !== '') {
+        // if (eventTexts !== '') {
             // push texts into empty events array
             eventsArr.push(eventTexts);
-        }
+        // }
     }
+    console.log(eventsArr);
 
     if (eventsArr.length !== 0) {
         // save event texts to local storage with key being specific timeblock time
-        localStorage.setItem(timeBlock, JSON.stringify(eventsArr));
+        localStorage.setItem(eventTime, JSON.stringify(eventsArr));
     }
 
     // button out of focus
@@ -169,7 +180,21 @@ function saveEvents(event, timeBlock) {
 }
 
 function loadEvents() {
+    // set object to be empty
+    let loadedEvents = {};
 
+    for (i = 0; i < 11; i++) {
+        // load saved events and turn into array
+        let savedEvents = JSON.parse(localStorage.getItem(time00[i]));
 
+        if (savedEvents !== null) {
+            let timeBlock = time00[i];
+            
+            // timeBlock acts as an index && it's a property of that object
+            loadedEvents[timeBlock] = savedEvents;
+        }
+    }
+    return loadedEvents; 
 }
+loadEvents();
 
