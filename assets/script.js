@@ -52,27 +52,13 @@ currDate();
 // reference the container element
 const containerEl = $('.container');
 
+// set time for timeblocks
+let time00 = ['700 AM', '800 AM', '900 AM', '1000 AM', '1100 AM', '1200 PM', '100 PM', '200 PM', '300 PM', '400 PM', '500 PM'];
+let time24 = [7, 8, 9, 10, 11, 12, 13, 14, 15, 18, 19]
+let time30 = ['730 AM', '830 AM', '930 AM', '1030 AM', '1130 AM', '1230 PM', '130 PM', '230 PM', '330 PM', '430 PM', '530 PM'];
+
 // dynamically create the timeblocks
 function createBlocks() {
-
-    // let time00 = [moment('7:00 AM', 'h:mm A').format('h:mm A'), '800 AM', '900 AM', '1000 AM', '1100 AM', '1200 PM', '100 PM', '200 PM', '300 PM', '400 AM', '500 PM'];
-    // let time30 = ['730 AM', '830 AM', '930 AM', '1030 AM', '1130 AM', '1230 PM', '130 PM', '230 PM', '330 PM', '430 AM', '530 PM'];
-
-    let time00 = ['700 AM', '800 AM', '900 AM', '1000 AM', '1100 AM', '1200 PM', '100 PM', '200 PM', '300 PM', '400 AM', '500 PM'];
-    let time30 = ['730 AM', '830 AM', '930 AM', '1030 AM', '1130 AM', '1230 PM', '130 PM', '230 PM', '330 PM', '430 AM', '530 PM'];
-
-    // console.log(time00[0]);
-
-    // let timeNow = moment().format('h:mm A');
-    // console.log(timeNow);
-
-    // let sevenAm = moment('7:00 AM', 'h:mm A');
-    // console.log(sevenAm);
-
-    // let timeNowN = moment();
-    // console.log(timeNowN);
-
-    // console.log(sevenAm.isBefore(timeNowN));
 
     for(i = 0; i < 11; i++) {
         // create the row div element
@@ -88,7 +74,7 @@ function createBlocks() {
         hourEl.append(time1El, time2El);
 
         // create description element
-        const desEl = $("<div>").addClass("description col-8 p-0 d-flex flex-column");
+        const desEl = $("<div>").attr('id',time24[i]).addClass("description col-8 p-0 d-flex flex-column");
         // create 00 des element
         let des1El = $("<textarea>").addClass("dtop h-50");
         // create 30 des element
@@ -109,64 +95,73 @@ function createBlocks() {
         // append row to container
         containerEl.append(rowEl);
     }
-
-    // $('.htop').each(function () {
-
-    //     // convert to military time and compare those
-    //     // for each method to loop through array of time and convert to military time ALSO .map
-
-
-    //     let timeNowInt = parseInt(timeNow); // 12
-    //     // console.log("timenow is " + timeNowInt);
-
-    //     let intTime00 = parseInt(time00[0]); // 7
-    //     // console.log('time past is ' + intTime00)
-
-    //     console.log(timeNowInt, ' vs ', intTime00);
-
-    //         // 7          12
-    //     if (intTime00 < timeNow) {
-    //         console.log('past');
-    //     }
-    //     if (intTime00 > timeNow) {
-    //         console.log('hi');
-    //     }
-
-    // });
 };
 createBlocks();
 
+function compareTime() {
+
+    // get current HR in 24hr format
+    let currHR = moment().format('HH');
+    // console.log(currHR);
+    let currTime = parseInt(currHR);
+    console.log(currHR);
+
+    // reference text area
+    const textArea = $('.description');
+    // remove previous past, present, future classes
+    $(textArea).removeClass('.past .present .future')
+
+    // // get current minute
+    // let currMIN = moment().format('mm');
+    // // console.log(currMIN);
+
+    // // set current time in HHMM format 
+    // let currTime = currHR + '' + currMIN;
+    // // convert to integer
+    // currTime = parseInt(currTime);
+    // console.log(currTime);
+
+    // compare 00 hour to current time
+    for (i = 0; i < 11; i++) {
+
+        // get each hr value from time24 array
+        let blockTime = time24[i];
+
+        // reference textarea element by id
+        let textAreaEl = $('#' + blockTime);
+        console.log(textAreaEl);
+        
+        // if blockTime is less than currTime --> add past class
+        if (blockTime < currTime) {
+            console.log(time24[i]);
+            console.log('past');
+
+            // get textarea for htop and hbot and add past class
+            textAreaEl.addClass('past');
+        }
+        // if blockTime is greater than currTime --> add future class
+        else if (blockTime > currTime) {
+
+            console.log('future');
+
+            // // get textarea for htop and hbot and add future class
+            textAreaEl.addClass('future');
+        }
+        // else add present class
+        else {}
+
+  
+    }
+
+
+    // $('.htop').each(function () {
+
+    //     let intTime00 = parseInt(time00[i]);
 
 
 
+    // });
 
-
-
-
-
-// // when button is clicked, convert textarea to one text area
-// $('.saveBtn').click(function() {
-
-//     // find description div
-//     const des = $(this).closest('div').find('.description');
-//     // remove children
-//     des.remove();
-
-//     // create 1 textarea
-//     let textEl = $("<textarea>").addClass("dtop h-100");
-
-//     // append to div
-//     des.append(textEl);
-
-//     containerEl.append(des);
-
-//     console.log(des);
-
-// });
-
-// function timeBlockColor() {
-
-//     let currTime = 
-
-// }
+};
+compareTime();
 
