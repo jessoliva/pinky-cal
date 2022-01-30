@@ -63,7 +63,7 @@ function createBlocks() {
 
         // create button element
         // have to use specific sequence of quotes for saveEvents arguments @ attr
-        const btnEl = $('<button>').addClass('saveBtn col-1 btn').attr('onclick', "saveEvents(event, '" + time00[i] + "')"); 
+        const btnEl = $('<button>').addClass('saveBtn col-1 btn').attr('onclick', "saveEvents(event, '" + time00[i] + "')").attr('onkeypress', 'return enterKeyPressed(event)'); 
         // create span element
         const spanEl = $('<span>').addClass('oi oi-task');
         // append span to button
@@ -159,6 +159,14 @@ function saveEvents(event, eventTime) {
     // button out of focus
     event.target.blur();
 }
+
+// if enter key is pressed when focus is on button, then run saveEvents
+function enterKeyPressed(event) {
+    if (event.keyCode == 13) {
+       saveScore();
+       return true;
+    }
+};
 
 // load the events for each timeblock from local storage
 function loadEvents() {
