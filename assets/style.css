@@ -28,13 +28,13 @@ body {
 }
 /* JUMBOTRON STYLES START */
 
-/* TIME DISPLAY STYLES START */
+/* CURRENT TIME DISPLAY STYLES START */
 .time-display {
   background-color: #393a10;
 }
-/* TIME DISPLAY STYLES END */
+/* CURRENT TIME DISPLAY STYLES END */
 
-/* HOUR BLOCK STYLES START */
+/* BLOCK STYLES START */
 .row {
   white-space: pre-wrap;
   height: 80px;
@@ -42,7 +42,7 @@ body {
   /* border-top: 1px solid #C4C0AB; */
 }
 
-/* time section styles */
+/* TIME section styles */
 .time-block {
   text-align: center;
   border-radius: 15px;
@@ -54,7 +54,7 @@ body {
   font-weight: 500;
   font-size: 12px;
   color: #000000;
-  background-color: #ffffff;
+  background-color: #D5BB9A;
   white-space: pre-wrap;
   padding-right: 5px;
   margin-right: 3px;
@@ -69,7 +69,7 @@ body {
 	max-width: 11%;
 }
 
-/* both hour and description */
+/* BOTH hour and description */
 .hbot, .dbot {
   border-top: 1px dashed #393a10;
 }
@@ -78,15 +78,15 @@ body {
   border-top: 1px solid #393a10;
 }
 
-/* time description section styles */
+/* DESCRIPTION section styles */
 textarea {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 14px;
+  color: #393a10;
   background: transparent;
   border: none;
   resize: none;
-  color: #393a10;
   /* border-left: 1px solid black; */
   padding: 10px;
 }
@@ -106,20 +106,27 @@ textarea:focus {
   padding: 6px 6px;
 }
 
-/* save button styles */
+/* SAVE button styles */
 .saveBtn {
   color: white;
+  background-color: #80633f;
   border-top: 1px solid #393a10;
   border-left: 1px solid #393a10;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
-  background-color: #787354;
 }
+/* #C08787 */
 
 .saveBtn:hover {
-  color: #393a10;
+  color: #393a10;  
+  background-color: #C9A77E;
   transition: all 0.6s ease-in-out;
-  background-color: #c4c0ab;
+}
+
+.saveBtn:not(:hover) {
+  color: white;  
+  background-color:  #80633f;
+  transition: all 0.6s ease-in-out;
 }
 
 .saveBtn span {
@@ -129,17 +136,11 @@ textarea:focus {
 
 /* WHEN STYLES START */
 .past {
-  background-color: red;
-  color: white;
-}
-
-.present {
-  background-color: blue;
-  color: white;
+  background-color: #787354dc;
 }
 
 .future {
-  background-color: #77dd77;
+  background-color: #c4c0ab;
   color: white;
 }
 /* WHEN STYLES END */

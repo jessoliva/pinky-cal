@@ -54,7 +54,7 @@ const containerEl = $('.container');
 
 // set time for timeblocks
 let time00 = ['700 AM', '800 AM', '900 AM', '1000 AM', '1100 AM', '1200 PM', '100 PM', '200 PM', '300 PM', '400 PM', '500 PM'];
-let time24 = [7, 8, 9, 10, 11, 12, 13, 14, 15, 18, 19]
+let time24 = [7, 8, 9, 10, 11, 12, 13, 14, 15, 19, 20]
 let time30 = ['730 AM', '830 AM', '930 AM', '1030 AM', '1130 AM', '1230 PM', '130 PM', '230 PM', '330 PM', '430 PM', '530 PM'];
 
 // dynamically create the timeblocks
@@ -98,8 +98,8 @@ function createBlocks() {
 };
 createBlocks();
 
+// compare current time to block time to change description div color
 function compareTime() {
-
     // get current HR in 24hr format
     let currHR = moment().format('HH');
     // console.log(currHR);
@@ -110,16 +110,6 @@ function compareTime() {
     const textArea = $('.description');
     // remove previous past, present, future classes
     $(textArea).removeClass('.past .present .future')
-
-    // // get current minute
-    // let currMIN = moment().format('mm');
-    // // console.log(currMIN);
-
-    // // set current time in HHMM format 
-    // let currTime = currHR + '' + currMIN;
-    // // convert to integer
-    // currTime = parseInt(currTime);
-    // console.log(currTime);
 
     // compare 00 hour to current time
     for (i = 0; i < 11; i++) {
@@ -147,21 +137,9 @@ function compareTime() {
             // // get textarea for htop and hbot and add future class
             textAreaEl.addClass('future');
         }
-        // else add present class
+        // else leave as is
         else {}
-
-  
     }
-
-
-    // $('.htop').each(function () {
-
-    //     let intTime00 = parseInt(time00[i]);
-
-
-
-    // });
-
 };
 compareTime();
 
