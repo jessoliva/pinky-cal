@@ -1,48 +1,15 @@
-// GIVEN I am using a daily planner to create a schedule
-// WHEN I open the planner
-// THEN the current day is displayed at the top of the calendar
-// WHEN I scroll down
-// THEN I am presented with time blocks for standard business hours
-// WHEN I view the time blocks for that day
-// THEN each time block is color-coded to indicate whether it is in the past, present, or future
-// WHEN I click into a time block
-// THEN I can enter an event
-// WHEN I click the save button for that time block
-// THEN the text for that event is saved in local storage
-// WHEN I refresh the page
-// THEN the saved events persist
-
-// 1. Render time blocks
-//     ○ Can either hard code it in HTML using rows and cols w bootstrap
-//     ○ Loop over and render the table rows and cols in javascript
-
-// 2. Color Code time block for past, present, and future
-//     ○ Need some javascript, css
-//     ○ If then statements that relate to the date and apply certain css properties given that
-//     ○ (select html elements in javascript and add css to it)
-//         § Add attribute
-//         § .style
-        
-// 3. Allow user to type in event in timeblock 
-//     ○ Will need some input fields, with text saved in local storage
-//     ○ Attribute that indicates time-block on input fields
-//     ○ Local storage saves data in JSON string
-//     ○ On SAVE: Store the date/time as the key and the event as the value
-//         § Create and event listener for the save button that puts this key value pair into local storage
-
-// 1. When I refresh the page, the property persists
-// On refresh, grab the data from local storage and display it in the appropriate time block
-
-
-
+// get current date and time
 function currDate() {
-    // set current day to current day
+    // get current day
     let currentDay = $('#currentDay');
+    // set format for current day
     currentDay.text(moment().format('dddd, MMMM Do YYYY'));
 
+    // as each second passes, show it dynamically
     setInterval (function() {
-        // set current day to current day
+        // get current time
         let currentTime = $('#currentTime');
+        // set format for current time
         currentTime.text(moment().format('h:mm:ss A'));
 
     }, 1000);
@@ -51,13 +18,13 @@ currDate();
 
 // reference the container element
 const containerEl = $('.container');
-
+//
 // set time for timeblocks
 let time00 = ['700 AM', '800 AM', '900 AM', '1000 AM', '1100 AM', '1200 PM', '100 PM', '200 PM', '300 PM', '400 PM', '500 PM'];
 let timeHR = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
 let time30 = ['730 AM', '830 AM', '930 AM', '1030 AM', '1130 AM', '1230 PM', '130 PM', '230 PM', '330 PM', '430 PM', '530 PM'];
 let id = [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28];
-
+//
 // dynamically create the timeblocks
 function createBlocks() {
 
@@ -150,6 +117,7 @@ function compareTime() {
 };
 compareTime();
 
+// save the events onto local storage
 function saveEvents(event, eventTime) {
     // array to hold events for timeblock
     // save within function to ONLY save information of button clicked 
@@ -178,18 +146,7 @@ function saveEvents(event, eventTime) {
         eventsArr.push(textTop, textBot);
     }
 
-    // for (i = 0; i < 2; i++) {
-    //     // get value for each textarea
-    //     let eventTexts = textAreas[i].value;
-
-    //     // if textareas are empty
-    //     // if (eventTexts !== '') {
-    //         // push texts into empty events array
-    //         eventsArr.push(eventTexts);
-    //     // }
-    // }
-    // console.log(eventsArr);
-
+    // if the length of the array is not 0, then save it to local storage
     if (eventsArr.length !== 0) {
         // save event texts to local storage with key being specific timeblock time
         localStorage.setItem(eventTime, JSON.stringify(eventsArr));
@@ -199,21 +156,26 @@ function saveEvents(event, eventTime) {
     event.target.blur();
 }
 
+// load the events for each timeblock from local storage
 function loadEvents() {
     // set object to be empty
     let loadedEvents = {};
 
+    // loop through each timeblock and get the values from local storage
     for (i = 0; i < 11; i++) {
         // load saved events and turn into array
         let savedEvents = JSON.parse(localStorage.getItem(time00[i]));
 
+        // if savedEvents is not null (meaning there are actual values in local storage), then save it to the empty array
         if (savedEvents !== null) {
+            // get each time 00:00
             let timeBlock = time00[i];
             
-            // timeBlock acts as an index && it's a property of that object
+            // each timeblock 00:00 acts as an index && has a value of the array savedEvents, index=0 is top textarea and index=1 is bot textarea
             loadedEvents[timeBlock] = savedEvents;
         }
     }
+    // return the array with the saved events from local storage to use in createBlocks() to set them to the appropriate timeblocks
     return loadedEvents; 
 }
 loadEvents();
