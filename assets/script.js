@@ -54,15 +54,15 @@ const containerEl = $('.container');
 
 // set time for timeblocks
 let time00 = ['700 AM', '800 AM', '900 AM', '1000 AM', '1100 AM', '1200 PM', '100 PM', '200 PM', '300 PM', '400 PM', '500 PM'];
-let timeHR = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+let timeHR = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
 let time30 = ['730 AM', '830 AM', '930 AM', '1030 AM', '1130 AM', '1230 PM', '130 PM', '230 PM', '330 PM', '430 PM', '530 PM'];
+let id = [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28];
 
 // dynamically create the timeblocks
 function createBlocks() {
 
     // load saved events
     let savedEvents = loadEvents();
-    console.log(savedEvents);
 
     for(i = 0; i < 11; i++) {
         // create the row div element
@@ -86,7 +86,9 @@ function createBlocks() {
 
         // if a timeblock key in savedEvents exists, then set its values to the correct textarea
         if (savedEvents[time00[i]]) {
+            // set text for time 00:00
             des1El.text(savedEvents[time00[i]][0]);
+            // set text for time 00:30
             des2El.text(savedEvents[time00[i]][1]);
         }
         // append des1 and des2 to description
@@ -152,23 +154,41 @@ function saveEvents(event, eventTime) {
     // array to hold events for timeblock
     // save within function to ONLY save information of button clicked 
     let eventsArr = [];
+    // if this is saved outside of the function, when ANY saved button is clicked
+    // the text values will be pushed into that array, so mixing up the timeblocks
 
     // get main parent div 
     const mainParent = $(event.target).parent();
+    // get description div
     const textAreaParent = mainParent.children('.description');
+    // get textareas 
     const textAreas = textAreaParent.children('textarea');
 
-    for (i = 0; i < 2; i++) {
-        // get value for each textarea
-        let eventTexts = textAreas[i].value;
+    // get values for each textarea
+    const textTop = textAreas[0].value;
+    const textBot = textAreas[1].value;
 
-        // if textareas are empty
-        // if (eventTexts !== '') {
-            // push texts into empty events array
-            eventsArr.push(eventTexts);
-        // }
+    // if textTop is an empty value AND textBot is a non-empty value, then push both 
+    if (!textTop && textBot) {
+        eventsArr.push(textTop, textBot);
+        console.log(eventsArr);
     }
-    console.log(eventsArr);
+    // if textTop is a non-empty value AND textBot is an empty value, then push both 
+    if (textTop && !textBot) {
+        eventsArr.push(textTop, textBot);
+    }
+
+    // for (i = 0; i < 2; i++) {
+    //     // get value for each textarea
+    //     let eventTexts = textAreas[i].value;
+
+    //     // if textareas are empty
+    //     // if (eventTexts !== '') {
+    //         // push texts into empty events array
+    //         eventsArr.push(eventTexts);
+    //     // }
+    // }
+    // console.log(eventsArr);
 
     if (eventsArr.length !== 0) {
         // save event texts to local storage with key being specific timeblock time
