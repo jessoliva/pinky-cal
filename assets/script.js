@@ -82,7 +82,6 @@ createBlocks();
 function compareTime() {
     // get current HR in 24hr format
     let currHR = moment().format('HH');
-    // console.log(currHR);
     let currTime = parseInt(currHR);
 
     // reference text area
@@ -137,16 +136,9 @@ function saveEvents(event, eventTime) {
     const textBot = textAreas[1].value;
 
     // if textTop is an empty value AND textBot is a non-empty value, then push both 
-    if (!textTop && textBot) {
-        eventsArr.push(textTop, textBot);
-        console.log(eventsArr);
-    }
     // if textTop is a non-empty value AND textBot is an empty value, then push both 
-    if (textTop && !textBot) {
-        eventsArr.push(textTop, textBot);
-    }
     // if both textTop and textBot are filled, then push both
-    if (textTop && textBot) {
+    if (!textTop && textBot || textTop && !textBot || textTop && textBot) {
         eventsArr.push(textTop, textBot);
     }
 
