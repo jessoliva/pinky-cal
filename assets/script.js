@@ -31,7 +31,7 @@ function createBlocks() {
     // load saved events
     let savedEvents = loadEvents();
 
-    for(i = 0; i < 11; i++) {
+    for(i = 0; i < time00.length; i++) {
         // create the row div element
         const rowEl = $('<div>').addClass('row d-flex justify-content-center');
 
@@ -90,7 +90,7 @@ function compareTime() {
     $(textArea).removeClass('.past .present .future')
 
     // compare 00 hour to current time
-    for (i = 0; i < 11; i++) {
+    for (i = 0; i < timeHR.length; i++) {
 
         // get each hr value from timeHR array
         let blockTime = timeHR[i];
@@ -166,7 +166,7 @@ function loadEvents() {
     let loadedEvents = {};
 
     // loop through each timeblock and get the values from local storage
-    for (i = 0; i < 11; i++) {
+    for (i = 0; i < time00.length; i++) {
         // load saved events and turn into array
         let savedEvents = JSON.parse(localStorage.getItem(time00[i]));
 
