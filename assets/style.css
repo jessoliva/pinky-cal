@@ -1,10 +1,11 @@
+/* GENERAL BODY STYLES START */
 body {
   font-family: "Montserrat", sans-serif;
-  /* font-family: 'Poppins', sans-serif; */
   font-size: 16px;
   line-height: 1;
   background-color: #393a10;
 }
+/* GENERAL BODY STYLES END */
 
 /* JUMBOTRON STYLES START */
 .jumbotron {
@@ -64,7 +65,7 @@ body {
   padding: 6px 6px;
 }
 
-.col-15{
+.col-hour {
 	flex: 0 0 11%;
 	max-width: 11%;
 }
@@ -100,32 +101,35 @@ textarea:focus {
 .description {
   background-color: #eae8dd;
   white-space: pre-wrap;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 .dbot, .dtop {
   padding: 6px 6px;
 }
 
-/* SAVE button styles */
-.saveBtn {
+/* BOTH SAVE and CLEAR button styles */
+.saveBtn,
+.clearBtn {
   color: white;
   background-color: #80633f;
   border-top: 1px solid #393a10;
   border-left: 1px solid #393a10;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-radius: 15px;
 }
-/* #C08787 */
 
-.saveBtn:hover {
-  color: #393a10;  
-  background-color: #C9A77E;
+.saveBtn:not(:hover),
+.clearBtn:not(:hover) {
+  color: white;  
+  background-color:  #80633f;
   transition: all 0.6s ease-in-out;
 }
 
-.saveBtn:not(:hover) {
-  color: white;  
-  background-color:  #80633f;
+/* SAVE button styles */
+.saveBtn:hover {
+  color: #393a10;  
+  background-color: #C9A77E;
   transition: all 0.6s ease-in-out;
 }
 
@@ -133,6 +137,24 @@ textarea:focus {
   font-size: 35px;
   pointer-events: none; /* to stop icon from taking on click event */
 }
+
+/* CLEAR button styles */
+.col-clear {
+	flex: 0 0 6%;
+	max-width: 6%;
+}
+
+.clearBtn:hover {
+  color: black;  
+  background-color: maroon;
+  transition: all 0.6s ease-in-out;
+}
+
+.clearBtn span {
+  font-size: 25px;
+  pointer-events: none; /* to stop icon from taking on click event */
+}
+
 /* HOUR BLOCK STYLES END */
 
 /* WHEN STYLES START */
@@ -146,6 +168,32 @@ textarea:focus {
 }
 /* WHEN STYLES END */
 
-.des {
-  max-height: 70px;
+/* If the screen size is 600px wide or less, hide the element */
+@media only screen and (max-width: 600px) {
+  /* SAVE AND CLEAR BTNS STYLES START */
+  .saveBtn,
+  .clearBtn {
+    padding: 0;
+  }
+  /* SAVE AND CLEAR BTNS STYLES END */
+
+  /* SAVE BUTTON STYLES START */
+  .saveBtn span {
+    font-size: 20px;
+    padding-top: 5px;
+    padding-left: 4px;
+  }
+  /* SAVE BUTTON STYLES END */
+
+  /* CLEAR BUTTON STYLES START */
+  .col-clear {
+    flex: 0 0 8%;
+    max-width: 8%;
+  }
+
+  .clearBtn span {
+    font-size: 20px;
+    padding-top: 5px;
+  }
+  /* CLEAR BUTTON STYLES START */
 }

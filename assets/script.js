@@ -36,7 +36,7 @@ function createBlocks() {
         const rowEl = $('<div>').addClass('row d-flex justify-content-center');
 
         // create hour element
-        const hourEl = $('<div>').addClass('hour col-15 p-0 d-flex flex-column');
+        const hourEl = $('<div>').addClass('hour col-hour p-0 d-flex flex-column');
         // create 00 time element
         let time1El = $('<div>').addClass('htop h-50 text-right').text(time00[i]);
         // create 30 time element
@@ -50,7 +50,7 @@ function createBlocks() {
         let des1El = $('<textarea>').addClass('dtop h-50');
         // create 30 des element
         let des2El = $('<textarea>').addClass('dbot h-50');
-
+        //
         // if a timeblock key in savedEvents exists, then set its values to the correct textarea
         if (savedEvents[time00[i]]) {
             // set text for time 00:00
@@ -61,16 +61,24 @@ function createBlocks() {
         // append des1 and des2 to description
         desEl.append(des1El, des2El)
 
-        // create button element
+        // create save button element
         // have to use specific sequence of quotes for saveEvents arguments @ attr
         const btnEl = $('<button>').addClass('saveBtn col-1 btn').attr('onclick', "saveEvents(event, '" + time00[i] + "')").attr('onkeypress', 'return enterKeyPressed(event)'); 
         // create span element
-        const spanEl = $('<span>').addClass('oi oi-task');
+        const spanEl = $('<span>').addClass('oi oi-task d-flex justify-content-center');
         // append span to button
         btnEl.append(spanEl);
 
+        // create clear button element
+        // have to use specific sequence of quotes for saveEvents arguments @ attr
+        const clearEl = $('<button>').addClass('clearBtn col-clear btn').attr('onclick', "clearEvents(event, '" + time00[i] + "')").attr('onkeypress', 'return enterKeyPressed(event)'); 
+        // create span element
+        const spanClearEl = $('<span>').addClass('oi oi-delete d-flex justify-content-center');
+        // append span to button
+        clearEl.append(spanClearEl);
+
         // append hour, description, and button to row
-        rowEl.append(hourEl, desEl, btnEl);
+        rowEl.append(hourEl, desEl, btnEl, clearEl);
 
         // append row to container
         containerEl.append(rowEl);
@@ -183,4 +191,8 @@ function loadEvents() {
     return loadedEvents; 
 }
 loadEvents();
+
+function clearEvents() {
+
+}
 
