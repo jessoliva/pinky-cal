@@ -192,7 +192,23 @@ function loadEvents() {
 }
 loadEvents();
 
-function clearEvents() {
+// clear local storage and textareas for specific timeblock
+function clearEvents(event, eventTime) {
+    // clear local storage for that specific timeblock
+    localStorage.removeItem(eventTime);
 
+    // get main parent div 
+    const mainParent = $(event.target).parent();
+    // get description div
+    const textAreaParent = mainParent.children('.description');
+    // get textareas 
+    const textAreas = textAreaParent.children('textarea');
+
+    // clear textarea field
+    textAreas[0].value = '';
+    textAreas[1].value = '';
+
+    // button out of focus
+    event.target.blur();
 }
 
