@@ -16,6 +16,7 @@ function currDate() {
 }
 currDate();
 
+// createBlocks() function variables
 // reference the container element
 const containerEl = $('.container');
 //
@@ -159,7 +160,7 @@ function saveEvents(event, eventTime) {
     // button out of focus
     event.target.blur();
 }
-
+//
 // if enter key is pressed when focus is on button, then run saveEvents
 function enterKeyPressed(event) {
     if (event.keyCode == 13) {
@@ -167,6 +168,26 @@ function enterKeyPressed(event) {
        return true;
     }
 };
+
+// clear local storage and textareas for specific timeblock
+function clearEvents(event, eventTime) {
+    // clear local storage for that specific timeblock
+    localStorage.removeItem(eventTime);
+
+    // get main parent div 
+    const mainParent = $(event.target).parent();
+    // get description div
+    const textAreaParent = mainParent.children('.description');
+    // get textareas 
+    const textAreas = textAreaParent.children('textarea');
+
+    // clear textarea field
+    textAreas[0].value = '';
+    textAreas[1].value = '';
+
+    // button out of focus
+    event.target.blur();
+}
 
 // load the events for each timeblock from local storage
 function loadEvents() {
@@ -191,24 +212,3 @@ function loadEvents() {
     return loadedEvents; 
 }
 loadEvents();
-
-// clear local storage and textareas for specific timeblock
-function clearEvents(event, eventTime) {
-    // clear local storage for that specific timeblock
-    localStorage.removeItem(eventTime);
-
-    // get main parent div 
-    const mainParent = $(event.target).parent();
-    // get description div
-    const textAreaParent = mainParent.children('.description');
-    // get textareas 
-    const textAreas = textAreaParent.children('textarea');
-
-    // clear textarea field
-    textAreas[0].value = '';
-    textAreas[1].value = '';
-
-    // button out of focus
-    event.target.blur();
-}
-
