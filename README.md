@@ -6,9 +6,9 @@ The purpose of this project was to create an application for a client that an em
 
 ## Built With
 
-![js percentage](https://img.shields.io/badge/javascript-59.8%-green)
-![css percentage](https://img.shields.io/badge/css-22.6%25-ff69b4)
-![html percentage](https://img.shields.io/badge/html-17.6%25-9cf)
+![js percentage](https://img.shields.io/badge/javascript-58.8%-green)
+![css percentage](https://img.shields.io/badge/css-26.5%25-ff69b4)
+![html percentage](https://img.shields.io/badge/html-14.7%25-9cf)
 
 ## Table of Contents
 
@@ -25,21 +25,25 @@ This a description of the requirements for the application requested by the clie
 
 - AS AN employee with a busy schedule I WANT to add important events to a daily planner SO THAT I can manage my time effectively
 
+AS A user never knowing what I want to eat I WANT to be able to input certain criteria (cuisines I don't want, distances I don't want to pass) SO THAT the app can randomly select a restaurant based off that criteria
+
 ## Challenge - Acceptance Criteria
 
 The following criteria for the application had to be met:
 
-GIVEN I need a new, secure password
-- WHEN I click the start button <br />
-  THEN a timer starts and I am presented with a question
-- WHEN I answer a question <br />
-  THEN I am presented with another question
-- WHEN I answer a question incorrectly <br />
-  THEN time is subtracted from the clock
-- WHEN all questions are answered or the timer reaches 0 <br />
-  THEN the game is over
-- WHEN the game is over <br />
-  THEN I can save my initials and score
+GIVEN I am using a daily planner to create a schedule
+- WHEN I open the planner <br />
+  THEN the current day is displayed at the top of the calendar
+- WHEN I scroll down <br />
+  THEN I am presented with time blocks for standard business hours
+- WHEN I view the time blocks for that day <br />
+  THEN each time block is color-coded to indicate whether it is in the past, present, or future
+- WHEN I click into a time block <br />
+  THEN I can enter an event
+- WHEN I click the save button for that time block <br />
+  THEN the text for that event is saved in local storage
+- WHEN I refresh the page <br />
+  THEN the saved events persist
 
 ## Application Website Link
 
@@ -48,49 +52,42 @@ GIVEN I need a new, secure password
 ## JavaScript Code
 
 To build this application, I wrote code that overall does the following:
-- The start screen displays, explaining the quiz and parameters
+- The initial screen displays the current time and day above the schedule, and the schedule is empty
+    - The event container for the current hour will be white
+    - The event container for past hours will be a dark, deep green
+    - The event container for future hours will be a light, pastel green
 
 <p align="left" width="100%">
-&emsp;&emsp;&emsp;<img src="assets/images/1start.jpeg" alt="start screen" width="75%" align="top"> 
+&emsp;&emsp;&emsp;<img src="assets/images/1empty.png" alt="start screen" width="75%" align="top"> 
 </p>
 
-- When the user clicks the start button, the first question displays
-    - The top right of the screen displays a timer with a countdown starting at 150 seconds
+- The user can input events into the schedule per half hour timeblocks. When the user clicks on a half hour textarea, that textarea will go into focus so the user can input text.
+    - When the user clicks on the checkmark button, that specific event for that specific timeblock will be saved onto local storage. This is to prevent the event from being removed when the page is refreshed.
+ 
 
 <p align="left" width="100%">
-&emsp;&emsp;&emsp;<img src="assets/images/2ques.jpeg" alt="question screen with wrong answer" width="75%" align="top"> 
+&emsp;&emsp;&emsp;<img src="assets/images/2start day.png" alt="question screen with wrong answer" width="75%" align="top"> 
 </p>
 
-- When the user answers the question correctly, the next question displays
-
-- When the user answers the question incorrectly, 10 seconds are deducted from the timer. The user is alerted of the 10sec deduction. Then the next question is displayed
-
 <p align="left" width="100%">
-&emsp;&emsp;&emsp;<img src="assets/images/3ques.jpeg" alt="question screen" width="75%" align="top"> 
+&emsp;&emsp;&emsp;<img src="assets/images/3adding tasks.png" alt="question screen" width="75%" align="top"> 
+</p>
+<p align="left" width="100%">
+&emsp;&emsp;&emsp;<img src="assets/images/3adding tasks2.png" alt="enter score screen" width="75%" align="top"> 
 </p>
 
-- When the user finishes answering all of the questions, the timer stops and end quiz screen displays. The end screen shows the users score, which is based on the time left on the timer and asks the user to input a name to save the score. When the user clicks submit, or presses enter when they're still in the input field, their score is saved.
+- When the user clicks the x button, the textarea field for that specific timeblock will be cleared and the saved event for that timeblock will be removed from local storage.
 
 <p align="left" width="100%">
-&emsp;&emsp;&emsp;<img src="assets/images/4score.jpeg" alt="enter score screen" width="75%" align="top"> 
+&emsp;&emsp;&emsp;<img src="assets/images/4delete tasks.png" alt="lose screen" width="75%" align="top"> 
 </p>
-
-- If the time runs out, the user loses and the lose screen is displayed. The user is provided with two options: 
-    - If they click the "Do you want to play again?" button, the quiz restarts.
-    - If they click the "Home Screen" button, they are taken to the start screen.
-
 <p align="left" width="100%">
-&emsp;&emsp;&emsp;<img src="assets/images/5lose.jpeg" alt="lose screen" width="75%" align="top"> 
+&emsp;&emsp;&emsp;<img src="assets/images/4deletetasks2.png" alt="enter score screen" width="75%" align="top"> 
 </p>
-
-- The left top link "View High Scores" takes you to another page where high scores are displayed. The high scores are displayed in descending order. The user is presented with two options:
-    - If they click the "Go Back" button, they are taken to the start screen.
-    - If they click the "Clear High Scores" button, the high scores are cleared.
 <p align="left" width="100%">
-&emsp;&emsp;&emsp;<img src="assets/images/6scores.jpeg" alt="enter score screen" width="75%" align="top"> 
+&emsp;&emsp;&emsp;<img src="assets/images/5end result.png" alt="enter score screen" width="75%" align="top"> 
 </p>
 
 ## Credits
-- Web Dev Simplified - [Build A Quiz App With Javascript](https://www.youtube.com/watch?v=riDzcEQbX6k)
 - [Stack Overflow: CSS Transition](https://stackoverflow.com/questions/27903965/can-i-apply-a-css-transition-on-hover-out-only)
 - Badges - [Shields.io](https://shields.io/)
