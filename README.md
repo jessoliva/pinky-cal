@@ -1,4 +1,4 @@
-# Challenge 5 - Quiz
+# Challenge 5 - Work Day Scheduler
 
 ## Purpose
 
