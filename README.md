@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The purpose of this project was to create an application for a client that an employee can use to generate a password that meets criteria the employee has selected. 
+The purpose of this project was to create an application for a client that a user can use to schedule their workday by half hour increments. 
 
 ## Built With
 
