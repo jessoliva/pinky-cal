@@ -6,7 +6,7 @@ The purpose of this project was to create an application for a client that an em
 
 ## Built With
 
-![js percentage](https://img.shields.io/badge/javascript-58.8%-green)
+![js percentage](https://img.shields.io/badge/java-58.8%25-green)
 ![css percentage](https://img.shields.io/badge/css-26.5%25-ff69b4)
 ![html percentage](https://img.shields.io/badge/html-14.7%25-9cf)
 
