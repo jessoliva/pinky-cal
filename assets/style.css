@@ -156,7 +156,6 @@ textarea:focus {
   font-size: 25px;
   pointer-events: none; /* to stop icon from taking on click event */
 }
-
 /* HOUR BLOCK STYLES END */
 
 /* WHEN STYLES START */
@@ -170,6 +169,7 @@ textarea:focus {
 }
 /* WHEN STYLES END */
 
+/* MEDIA QUERY STYLES START */
 /* If the screen size is 600px wide or less, hide the element */
 @media only screen and (max-width: 600px) {
   /* SAVE AND CLEAR BTNS STYLES START */
